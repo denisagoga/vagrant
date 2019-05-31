@@ -1,0 +1,60 @@
+# creating a local Linux lab environment
+
+1-Install an SSH Client, Git Bash (windows users)
+2-Install VirtualBox (All Users)
+3-Install Vagrant (All Users)
+4-Start a Command Line Session (All Users)
+
+5-Add a Box to Vagrant
+vagrant box add centos/7
+
+6-Create a Working Folder
+mkdir shell
+
+7-Change into the Working Folder
+cd shell
+
+8-Create a Vagrant Project Folder and change into that folder
+mkdir testproject
+cd testproject
+
+9-Create the Vagrant configuration file (Vagrantfile)
+vagrant init centos/7
+
+10-Create Your First Virtual Machine
+vagrant up
+
+11-Confirm That It's Running
+vagrant status
+
+# multiple virtual machines
+
+12-Open the vagrant file 'Vagrantfile'  with the text editor VIM to add two virtual machines and asign them a host name an ip addr
+Below: config.vm.box="centos/7"  
+Add:
+config.vm.define "Server1" do | Server1|
+ServerOne.vm.hostname = "Server1"
+ServerOne.vm.network "private_network", ip: "x.x.x.x1"
+end
+
+config.vm.define "Server2" do | Server2|
+ServerTwo.vm.hostname = "Server2"
+ServerTwo.vm.network "private_network", ip: "x.x.x.x2"
+end
+
+13.Save the changes and start the VM-s
+vagrant up
+
+14.Check their status 
+vagrant status
+
+15-Connect to the server1 virtual machine to confirm that it’s working and then exit it.
+vagrant ssh Server1
+exit
+
+16.Connect to the Server2 virtual machine to confirm that it’s working. While you are logged into the Server2
+VM, ping the Server1 VM to prove that the two virtual machines can communicate with each other over
+the network.
+
+$vagrant ssh Server2
+$ping -c 3 x.x.x.x1
